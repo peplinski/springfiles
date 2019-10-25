@@ -2,8 +2,8 @@ package pl.springboot.file.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.springboot.file.model.User;
+import pl.springboot.file.model.Schedule;
 @Repository
-public interface SpringReadFileRepository extends CrudRepository<User,Long> {
+public interface SpringReadFileRepository extends CrudRepository<Schedule,Long> {
 
 }

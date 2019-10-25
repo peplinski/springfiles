@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +27,10 @@ public class User {
     private MultipartFile file;
 
 
-    public User() {
+    public Schedule() {
     }
 
-    public User(String firstName, String lastName, String email, String phoneNumber, String fileType) {
+    public Schedule(String firstName, String lastName, String email, String phoneNumber, String fileType) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -97,7 +97,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Schedule{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

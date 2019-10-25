@@ -30,7 +30,7 @@
             </div>
 
 
-            <form action="" th:action="@{'/fileupload'}" th:object="${user}" method="post"
+            <form action="" th:action="@{'/fileupload'}" th:object="${schedule}" method="post"
                   enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="file">File Upload(EXEL or CSV or JSON)</label>
@@ -52,13 +52,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!--/*@thymesVar id="users" type="pl.springboot.file.model.User"*/-->
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.firstName}">John</td>
-                    <td th:text="${user.lastName}">Doe</td>
-                    <td th:text="${user.email}">john@example.com</td>
-                    <td th:text="${user.phoneNumber}">111 111 111</td>
-                    <td th:text="${user.fileType}">csv</td>
+                <!--/*@thymesVar id="schedules" type="pl.springboot.file.model.Schedule"*/-->
+                <tr th:each="schedule : ${schedules}">
+                    <td th:text="${schedule.firstName}">John</td>
+                    <td th:text="${schedule.lastName}">Doe</td>
+                    <td th:text="${schedule.email}">john@example.com</td>
+                    <td th:text="${schedule.phoneNumber}">111 111 111</td>
+                    <td th:text="${schedule.fileType}">csv</td>
                 </tr>
                 </tbody>
             </table>

@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import pl.springboot.file.model.User;
+import pl.springboot.file.model.Schedule;
 import pl.springboot.file.repository.SpringReadFileRepository;
 
 import java.io.InputStream;
@@ -36,8 +36,8 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
     }
 
     @Override
-    public List<User> findAll() {
-        return (List<User>) springReadFileRepository.findAll();
+    public List<Schedule> findAll() {
+        return (List<Schedule>) springReadFileRepository.findAll();
     }
 
     @Override
@@ -64,24 +64,24 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
         rows.next();
         while (rows.hasNext()){
             Row row = rows.next();
-            User user = new User();
+            Schedule schedule = new Schedule();
             if (row.getCell(0).getCellTypeEnum()== CellType.STRING){
-                user.setFirstName(row.getCell(0).getStringCellValue().trim());
+                schedule.setFirstName(row.getCell(0).getStringCellValue().trim());
             }
             if (row.getCell(1).getCellTypeEnum()== CellType.STRING){
-                user.setLastName(row.getCell(1).getStringCellValue());
+                schedule.setLastName(row.getCell(1).getStringCellValue());
             }
             if (row.getCell(2).getCellTypeEnum()== CellType.STRING){
-                user.setEmail(row.getCell(2).getStringCellValue());
+                schedule.setEmail(row.getCell(2).getStringCellValue());
             }
             if (row.getCell(3).getCellTypeEnum()== CellType.NUMERIC){
                 String phoneNumber = NumberToTextConverter.toText(row.getCell(3).getNumericCellValue());
-                user.setPhoneNumber(phoneNumber);
+                schedule.setPhoneNumber(phoneNumber);
             }else if (row.getCell(3).getCellTypeEnum()==CellType.STRING){
-                user.setPhoneNumber(row.getCell(3).getStringCellValue());
+                schedule.setPhoneNumber(row.getCell(3).getStringCellValue());
             }
-            user.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
-            springReadFileRepository.save(user);
+            schedule.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
+            springReadFileRepository.save(schedule);
 
         }
         return true;
@@ -115,7 +115,7 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
                 if (row.length<0)
                     continue;
                 springReadFileRepository.save(
-                        new User(row[0], row[1], row[2], row[3],
+                        new Schedule(row[0], row[1], row[2], row[3],
                                 FilenameUtils.getExtension(file.getOriginalFilename())));
                 System.out.println(row);
             }
@@ -129,11 +129,11 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
         try {
             InputStream inputStream = file.getInputStream();
             ObjectMapper mapper = new ObjectMapper();
-            List<User> users = Arrays.asList(mapper.readValue(inputStream, User[].class));
-            if (users != null && users.size() > 0) {
-                for (User user : users) {
-                    user.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
-                    springReadFileRepository.save(user);
+            List<Schedule> schedules = Arrays.asList(mapper.readValue(inputStream, Schedule[].class));
+            if (schedules != null && schedules.size() > 0) {
+                for (Schedule schedule : schedules) {
+                    schedule.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
+                    springReadFileRepository.save(schedule);
                 }
             }
             return true;
