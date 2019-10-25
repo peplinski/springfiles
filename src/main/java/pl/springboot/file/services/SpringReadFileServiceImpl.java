@@ -107,7 +107,7 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
         try {
             InputStreamReader reader = new InputStreamReader(file.getInputStream());
             CSVParser parser = new CSVParserBuilder()
-                    .withSeparator(',')
+                    .withSeparator(';')
                     .build();
             CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(parser).build();
             List<String[]> rows = csvReader.readAll();

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -29,7 +29,7 @@
                 <strong th:text="${errormessage}"></strong>
             </div>
 
-            <!--/*@thymesVar id="user" type="pl.springboot.file.model.User"*/-->
+
             <form action="" th:action="@{'/fileupload'}" th:object="${user}" method="post"
                   enctype="multipart/form-data">
                 <div class="form-group">
