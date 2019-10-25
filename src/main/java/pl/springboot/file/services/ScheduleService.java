@@ -6,7 +6,7 @@ import pl.springboot.file.model.Schedule;
 
 import java.util.List;
 
-public interface SpringReadFileService {
+public interface ScheduleService {
     List<Schedule> findAll();
 
 

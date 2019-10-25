@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pl.springboot.file.model.Schedule;
-import pl.springboot.file.repository.SpringReadFileRepository;
+import pl.springboot.file.repository.ScheduleRepository;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,17 +27,17 @@ import java.util.List;
 
 @Service
 @Transactional
-public class SpringReadFileServiceImpl implements SpringReadFileService {
+public class ScheduleServiceImpl implements ScheduleService {
 
-    private SpringReadFileRepository springReadFileRepository;
+    private ScheduleRepository scheduleRepository;
 
-    public SpringReadFileServiceImpl(SpringReadFileRepository springReadFileRepository) {
-        this.springReadFileRepository = springReadFileRepository;
+    public ScheduleServiceImpl(ScheduleRepository scheduleRepository) {
+        this.scheduleRepository = scheduleRepository;
     }
 
     @Override
     public List<Schedule> findAll() {
-        return (List<Schedule>) springReadFileRepository.findAll();
+        return (List<Schedule>) scheduleRepository.findAll();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
                 schedule.setPhoneNumber(row.getCell(3).getStringCellValue());
             }
             schedule.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
-            springReadFileRepository.save(schedule);
+            scheduleRepository.save(schedule);
 
         }
         return true;
@@ -114,7 +114,7 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
             for (String[] row : rows) {
                 if (row.length<0)
                     continue;
-                springReadFileRepository.save(
+                scheduleRepository.save(
                         new Schedule(row[0], row[1], row[2], row[3],
                                 FilenameUtils.getExtension(file.getOriginalFilename())));
                 System.out.println(row);
@@ -133,7 +133,7 @@ public class SpringReadFileServiceImpl implements SpringReadFileService {
             if (schedules != null && schedules.size() > 0) {
                 for (Schedule schedule : schedules) {
                     schedule.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
-                    springReadFileRepository.save(schedule);
+                    scheduleRepository.save(schedule);
                 }
             }
             return true;
