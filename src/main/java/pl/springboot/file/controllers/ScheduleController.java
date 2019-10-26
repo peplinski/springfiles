@@ -26,12 +26,12 @@ public class ScheduleController {
         List<Schedule> schedules = scheduleService.findAll();
         model.addAttribute("schedules", schedules);
 
-        return "view/users";
+        return "view/schedules";
     }
 
     @PostMapping(value = "/fileupload")
     public String uploadFile(@ModelAttribute Schedule schedule, RedirectAttributes redirectAttributes){
-boolean isFlag = scheduleService.saveDataFromUploadFile(schedule.getFile());
+boolean isFlag = scheduleService.readDataFromCsv(schedule.getFile(),schedule.getDate());
 if (isFlag){
     redirectAttributes.addFlashAttribute("succesmessage","File Upload Successfully");
 }else {

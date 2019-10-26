@@ -5,23 +5,24 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "schedule")
 public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "phone_number")
-    private String phoneNumber;
-    @Column(name = "file_type")
-    private String fileType;
+    @Column(name = "date")
+    private String date;
+    @Column(name = "rodzaj_rozkladu")
+    private String rodzajRozkladu;
+    @Column(name = "nr_sluzbowy")
+    private String nrSluzbowy;
+    @Column(name = "linia")
+    private String linia;
+    @Column(name = "poczatekPracy")
+    private String poczatekPracy;
+    @Column(name = "koniecPracy")
+    private String koniecPracy;
 
     @Transient
     private MultipartFile file;
@@ -30,13 +31,13 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(String firstName, String lastName, String email, String phoneNumber, String fileType) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.fileType = fileType;
+    public Schedule(String date, String rodzajRozkladu, String nrSluzbowy, String linia, String poczatekPracy, String koniecPracy) {
+        this.date = date;
+        this.rodzajRozkladu = rodzajRozkladu;
+        this.nrSluzbowy = nrSluzbowy;
+        this.linia = linia;
+        this.poczatekPracy = poczatekPracy;
+        this.koniecPracy = koniecPracy;
     }
 
     public Long getId() {
@@ -47,44 +48,52 @@ public class Schedule {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getDate() {
+        return date;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getRodzajRozkladu() {
+        return rodzajRozkladu;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setRodzajRozkladu(String rodzajRozkladu) {
+        this.rodzajRozkladu = rodzajRozkladu;
     }
 
-    public String getEmail() {
-        return email;
+    public String getNrSluzbowy() {
+        return nrSluzbowy;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNrSluzbowy(String nrSluzbowy) {
+        this.nrSluzbowy = nrSluzbowy;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getLinia() {
+        return linia;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setLinia(String linia) {
+        this.linia = linia;
     }
 
-    public String getFileType() {
-        return fileType;
+    public String getPoczatekPracy() {
+        return poczatekPracy;
     }
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
+    public void setPoczatekPracy(String poczatekPracy) {
+        this.poczatekPracy = poczatekPracy;
+    }
+
+    public String getKoniecPracy() {
+        return koniecPracy;
+    }
+
+    public void setKoniecPracy(String koniecPracy) {
+        this.koniecPracy = koniecPracy;
     }
 
     public MultipartFile getFile() {
@@ -93,18 +102,5 @@ public class Schedule {
 
     public void setFile(MultipartFile file) {
         this.file = file;
-    }
-
-    @Override
-    public String toString() {
-        return "Schedule{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", fileType='" + fileType + '\'' +
-                ", file=" + file +
-                '}';
     }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -14,11 +14,11 @@
     <div class="row">
         <div class="col-md-12">
             <h2>FileUpload</h2>
-            <!--alerty-->
             <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${succesmessage}">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <!--/*@thymesVar id="succesmessage" type="pl.springboot.file.model.Schedule"*/-->
                 <strong th:text="${succesmessage}"></strong>
             </div>
 
@@ -29,12 +29,13 @@
                 <strong th:text="${errormessage}"></strong>
             </div>
 
-
             <form action="" th:action="@{'/fileupload'}" th:object="${schedule}" method="post"
                   enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="file">File Upload(EXEL or CSV or JSON)</label>
+                    <label for="file">File Upload(CSV)</label>
                     <input type="file" class="form-control" id="file" name="file" th:field="*{file}">
+                    <label for="date">Data</label>
+                    <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -44,21 +45,22 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>File Type</th>
+                    <th>Data</th>
+                    <th>Rodzaj Rozkladu</th>
+                    <th>Nr Służbowy</th>
+                    <th>Linia</th>
+                    <th>Rozpoczęcie</th>
+                    <th>Zakończenie</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!--/*@thymesVar id="schedules" type="pl.springboot.file.model.Schedule"*/-->
                 <tr th:each="schedule : ${schedules}">
-                    <td th:text="${schedule.firstName}">John</td>
-                    <td th:text="${schedule.lastName}">Doe</td>
-                    <td th:text="${schedule.email}">john@example.com</td>
-                    <td th:text="${schedule.phoneNumber}">111 111 111</td>
-                    <td th:text="${schedule.fileType}">csv</td>
+                    <td th:text="${schedule.date}">20:01:2019</td>
+                    <td th:text="${schedule.rodzajRozkladu}">SOBOTA</td>
+                    <td th:text="${schedule.nrSluzbowy}">1111</td>
+                    <td th:text="${schedule.linia}">111</td>
+                    <td th:text="${schedule.poczatekPracy}">12:00</td>
+                    <td th:text="${schedule.koniecPracy}">19.59</td>
                 </tr>
                 </tbody>
             </table>

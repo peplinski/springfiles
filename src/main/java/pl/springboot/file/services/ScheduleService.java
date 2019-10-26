@@ -10,6 +10,6 @@ public interface ScheduleService {
     List<Schedule> findAll();
 
 
-    boolean saveDataFromUploadFile(MultipartFile file);
+    boolean readDataFromCsv(MultipartFile file,String date);
 }
 
