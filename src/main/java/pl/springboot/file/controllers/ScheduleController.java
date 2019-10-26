@@ -26,7 +26,7 @@ public class ScheduleController {
         List<Schedule> schedules = scheduleService.findAll();
         model.addAttribute("schedules", schedules);
 
-        return "view/schedules";
+        return "view/schedule/schedules";
     }
 
     @PostMapping(value = "/fileupload")
