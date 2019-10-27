@@ -13,6 +13,7 @@ public class Schedule {
     private Long id;
     @Column(name = "date")
     private String date;
+    //@Enumerated(value = EnumType.STRING)
     @Column(name = "rodzaj_rozkladu")
     private String rodzajRozkladu;
     @Column(name = "nr_sluzbowy")

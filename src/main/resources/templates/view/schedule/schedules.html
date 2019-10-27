@@ -34,8 +34,21 @@
                 <div class="form-group">
                     <label for="file">File Upload(CSV)</label>
                     <input type="file" class="form-control" id="file" name="file" th:field="*{file}">
+                </div>
+                <div>
                     <label for="date">Data</label>
                     <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
+                </div>
+                <div class="col-md-2">
+                <label for="rozklady">Rodzaj rozkladu</label>
+                <select class="form-control" id="rozklady" th:field="*{rodzajRozkladu}">
+                <option value="Powszedni Szkolny">Powszedni Szkolny</option>
+                <option value="Sobota">Sobota</option>
+                <option value="Niedziel">Niedziela</option>
+                <option value="Powszedni Ferie">Powszedni Ferie</option>
+                <option value="Powszedni Wakacje">Powszedni Wakacje</option>
+                <option value="Specjalny">Specjalny</option>
+                </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

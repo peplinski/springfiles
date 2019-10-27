@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.springboot.file.model.Schedule;
 import pl.springboot.file.repository.ScheduleRepository;
 
-
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         return (List<Schedule>) scheduleRepository.findAll();
     }
 
-    public boolean readDataFromCsv(MultipartFile file, String date) {
+    public boolean readDataFromCsv(MultipartFile file, String date, String rozklad ) {
         List<Schedule> scheduleList = new ArrayList<>();
         try {
             InputStreamReader reader = new InputStreamReader(file.getInputStream());
@@ -39,7 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             for (CSVRecord record : csvParser) {
                 Schedule schedule = new Schedule();
                 schedule.setDate(date);
-                schedule.setRodzajRozkladu("niedziela");
+                schedule.setRodzajRozkladu(rozklad);
                 schedule.setNrSluzbowy(record.get(0).trim());
                 schedule.setLinia(record.get(1).trim());
                 schedule.setPoczatekPracy(record.get(2).trim());

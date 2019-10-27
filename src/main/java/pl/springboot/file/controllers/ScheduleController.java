@@ -31,7 +31,7 @@ public class ScheduleController {
 
     @PostMapping(value = "/fileupload")
     public String uploadFile(@ModelAttribute Schedule schedule, RedirectAttributes redirectAttributes){
-boolean isFlag = scheduleService.readDataFromCsv(schedule.getFile(),schedule.getDate());
+boolean isFlag = scheduleService.readDataFromCsv(schedule.getFile(),schedule.getDate(),schedule.getRodzajRozkladu());
 if (isFlag){
     redirectAttributes.addFlashAttribute("succesmessage","File Upload Successfully");
 }else {
