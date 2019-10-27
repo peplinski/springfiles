@@ -15,21 +15,6 @@
         <div class="col-md-12">
             <h2>Dodaj Rozklad</h2>
             <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
-            <!--<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${succesmessage}">-->
-                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-                    <!--<span aria-hidden="true">&times;</span>-->
-                <!--</button>-->
-                <!--&lt;!&ndash;/*@thymesVar id="succesmessage" type="pl.springboot.file.model.RodzajRozkladu"*/&ndash;&gt;-->
-                <!--<strong th:text="${succesmessage}"></strong>-->
-            <!--</div>-->
-
-            <!--<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">-->
-                <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-                    <!--<span aria-hidden="true">&times;</span>-->
-                <!--</button>-->
-                <!--<strong th:text="${errormessage}"></strong>-->
-            <!--</div>-->
-
             <form action="" th:action="@{'/addrozklad'}" th:object="${rozklad}" method="post"
                   enctype="multipart/form-data">
                 <div class="col-md-2">
@@ -93,8 +78,11 @@
                             <td th:text="${rozklad.pierwszaLinia}">csv</td>
                         </tr>
                         </tbody>
+                    </table>
+                </div>
             </table>
         </div>
+
     </div>
 </div>
 
