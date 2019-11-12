@@ -24,6 +24,8 @@ public class Schedule {
     private String poczatekPracy;
     @Column(name = "koniecPracy")
     private String koniecPracy;
+    @Column(name = "miejsce_zmiany")
+    private String miejsceZmiany;
 
     @Transient
     private MultipartFile file;
@@ -32,13 +34,14 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(String date, String rodzajRozkladu, String nrSluzbowy, String linia, String poczatekPracy, String koniecPracy) {
+    public Schedule(String date, String rodzajRozkladu, String nrSluzbowy, String linia, String poczatekPracy, String koniecPracy, String miejsceZmiany) {
         this.date = date;
         this.rodzajRozkladu = rodzajRozkladu;
         this.nrSluzbowy = nrSluzbowy;
         this.linia = linia;
         this.poczatekPracy = poczatekPracy;
         this.koniecPracy = koniecPracy;
+        this.miejsceZmiany=miejsceZmiany;
     }
 
     public Long getId() {
@@ -95,6 +98,14 @@ public class Schedule {
 
     public void setKoniecPracy(String koniecPracy) {
         this.koniecPracy = koniecPracy;
+    }
+
+    public String getMiejsceZmiany() {
+        return miejsceZmiany;
+    }
+
+    public void setMiejsceZmiany(String miejsceZmiany) {
+        this.miejsceZmiany = miejsceZmiany;
     }
 
     public MultipartFile getFile() {
