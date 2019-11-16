@@ -6,21 +6,26 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import pl.springboot.file.model.RodzajRozkladu;
 import pl.springboot.file.model.Schedule;
+import pl.springboot.file.repository.RozkladRepository;
 import pl.springboot.file.repository.ScheduleRepository;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
     private ScheduleRepository scheduleRepository;
+    private RozkladRepository rozkladRepository;
 
-    public ScheduleServiceImpl(ScheduleRepository scheduleRepository) {
+    public ScheduleServiceImpl(ScheduleRepository scheduleRepository, RozkladRepository rozkladRepository) {
         this.scheduleRepository = scheduleRepository;
+        this.rozkladRepository = rozkladRepository;
     }
 
     @Override
@@ -28,7 +33,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         return (List<Schedule>) scheduleRepository.findAll();
     }
 
-    public boolean saveDataFromCsv(MultipartFile file, String date, String rozklad ) {
+    public boolean saveDataFromCsv(MultipartFile file, String date, String rozklad) {
         List<Schedule> scheduleList = new ArrayList<>();
         try {
             InputStreamReader reader = new InputStreamReader(file.getInputStream());
@@ -43,6 +48,8 @@ public class ScheduleServiceImpl implements ScheduleService {
                 schedule.setLinia(record.get(1).trim());
                 schedule.setPoczatekPracy(record.get(2).trim());
                 schedule.setKoniecPracy(record.get(3).trim());
+                //zrobić wyświetlanie wartości a nie string off
+                schedule.setMiejsceZmiany(String.valueOf(findAllByTypRozkladu(rozklad, schedule.getLinia(), schedule.getPoczatekPracy())));
                 if (record.get(0).isEmpty())
                     continue;
 
@@ -54,4 +61,28 @@ public class ScheduleServiceImpl implements ScheduleService {
             return false;
         }
     }
+
+    Optional<String> findAllByTypRozkladu(String typRozkladu, String startLine, String godz) {
+        List<RodzajRozkladu> rozkladList = new ArrayList<>();
+        rozkladRepository.findAll().forEach(rozkladList::add);
+        return Optional.ofNullable(rozkladList.stream()
+                .filter(r -> r.getTypRozkladu().equals(typRozkladu) &&
+                        r.getLinia().equals(startLine)
+                        && r.getGodzina().equals(godz))
+                .map(RodzajRozkladu::getMiejsceZmiany).findAny().orElse(""));
+
+    }
+
+//    String findAllByTypRozkladu(String typRozkladu) {
+//        Set<RodzajRozkladu> rozkladList = new HashSet<>();
+//        rozkladRepository.findAll().forEach(rozkladList:: add);
+//        return (typRozkladu);
+//    }
+
+//    Optional<RodzajRozkladu> findAllByTypRozkladu(String typRozkladu, String linia, String godz){
+//        List<RodzajRozkladu> rozkladList = new ArrayList<>();
+//        return rozkladList.stream().filter(List<RodzajRozkladu> findAllByTypRozkladu(String typRozkladu);)
+//                .findAny().filter(r-> Boolean.parseBoolean(r.getMiejsceZmiany()));
+//    }
+
 }

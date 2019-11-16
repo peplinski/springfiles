@@ -3,6 +3,7 @@ package pl.springboot.file.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "schedule")
@@ -41,7 +42,7 @@ public class Schedule {
         this.linia = linia;
         this.poczatekPracy = poczatekPracy;
         this.koniecPracy = koniecPracy;
-        this.miejsceZmiany=miejsceZmiany;
+        this.miejsceZmiany = miejsceZmiany;
     }
 
     public Long getId() {
@@ -114,5 +115,8 @@ public class Schedule {
 
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public void setMiejsceZmiany(List<RodzajRozkladu> allByTypRozkladu) {
     }
 }

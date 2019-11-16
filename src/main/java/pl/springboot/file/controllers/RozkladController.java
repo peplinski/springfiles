@@ -31,8 +31,8 @@ public class RozkladController {
     }
 
     @PostMapping(value = "/addrozklad")
-    public String addRozklad(@ModelAttribute RodzajRozkladu rodzajRozkladu, BindingResult result, RedirectAttributes redirectAttributes){
-       boolean isFlag = rozkladService.save(rodzajRozkladu);
+    public String addRozklad(@ModelAttribute RodzajRozkladu rodzajRozkladu, BindingResult result, RedirectAttributes redirectAttributes) {
+        boolean isFlag = rozkladService.save(rodzajRozkladu);
         redirectAttributes.addFlashAttribute("message", "Failed");
         redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
         if (result.hasErrors()) {

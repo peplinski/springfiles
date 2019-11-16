@@ -44,7 +44,7 @@
                 <select class="form-control" id="rozklady" th:field="*{rodzajRozkladu}">
                 <option value="Powszedni Szkolny">Powszedni Szkolny</option>
                 <option value="Sobota">Sobota</option>
-                <option value="Niedziel">Niedziela</option>
+                <option value="Niedziela">Niedziela</option>
                 <option value="Powszedni Ferie">Powszedni Ferie</option>
                 <option value="Powszedni Wakacje">Powszedni Wakacje</option>
                 <option value="Specjalny">Specjalny</option>
@@ -64,6 +64,7 @@
                     <th>Linia</th>
                     <th>Rozpoczęcie</th>
                     <th>Zakończenie</th>
+                    <th>Miejsce Zmiany</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,6 +75,7 @@
                     <td th:text="${schedule.linia}">111</td>
                     <td th:text="${schedule.poczatekPracy}">12:00</td>
                     <td th:text="${schedule.koniecPracy}">19.59</td>
+                    <td th:text="${schedule.miejsceZmiany}">zmiana</td>
                 </tr>
                 </tbody>
             </table>
