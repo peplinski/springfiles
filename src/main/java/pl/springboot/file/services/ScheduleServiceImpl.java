@@ -14,7 +14,6 @@ import pl.springboot.file.repository.ScheduleRepository;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -48,8 +47,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 schedule.setLinia(record.get(1).trim());
                 schedule.setPoczatekPracy(record.get(2).trim());
                 schedule.setKoniecPracy(record.get(3).trim());
-                //zrobić wyświetlanie wartości a nie string off
-                schedule.setMiejsceZmiany(String.valueOf(findAllByTypRozkladu(rozklad, schedule.getLinia(), schedule.getPoczatekPracy())));
+                schedule.setMiejsceZmiany(findAllByTypRozkladu(rozklad, schedule.getLinia(), schedule.getPoczatekPracy()));
                 if (record.get(0).isEmpty())
                     continue;
 
@@ -62,14 +60,14 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
     }
 
-    Optional<String> findAllByTypRozkladu(String typRozkladu, String startLine, String godz) {
+    String findAllByTypRozkladu(String typRozkladu, String startLine, String godz) {
         List<RodzajRozkladu> rozkladList = new ArrayList<>();
         rozkladRepository.findAll().forEach(rozkladList::add);
-        return Optional.ofNullable(rozkladList.stream()
+        return rozkladList.stream()
                 .filter(r -> r.getTypRozkladu().equals(typRozkladu) &&
                         r.getLinia().equals(startLine)
                         && r.getGodzina().equals(godz))
-                .map(RodzajRozkladu::getMiejsceZmiany).findAny().orElse(""));
+                .map(RodzajRozkladu::getMiejsceZmiany).findAny().orElse("");
 
     }
 
