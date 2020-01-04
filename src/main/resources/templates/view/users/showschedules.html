@@ -1,0 +1,45 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokaż dostępne Grafiki</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <h2>Dostępne Grafiki</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Data</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="schedule : ${dailySchedules}">
+                    <td th:text="${schedule.getSchedule().date}">20:01:2019</td>
+                    <!--<td th:text="${schedule.rodzajRozkladu}">SOBOTA</td>-->
+                    <!--<td th:text="${schedule.nrSluzbowy}">1111</td>-->
+                    <!--<td th:text="${schedule.linia}">111</td>-->
+                    <!--<td th:text="${schedule.poczatekPracy}">12:00</td>-->
+                    <!--<td th:text="${schedule.koniecPracy}">19.59</td>-->
+                    <!--<td th:text="${schedule.miejsceZmiany}">zmiana</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"/>
+</body>
+</html>

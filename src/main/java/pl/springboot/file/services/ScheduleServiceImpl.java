@@ -71,16 +71,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     }
 
-//    String findAllByTypRozkladu(String typRozkladu) {
-//        Set<RodzajRozkladu> rozkladList = new HashSet<>();
-//        rozkladRepository.findAll().forEach(rozkladList:: add);
-//        return (typRozkladu);
-//    }
-
-//    Optional<RodzajRozkladu> findAllByTypRozkladu(String typRozkladu, String linia, String godz){
-//        List<RodzajRozkladu> rozkladList = new ArrayList<>();
-//        return rozkladList.stream().filter(List<RodzajRozkladu> findAllByTypRozkladu(String typRozkladu);)
-//                .findAny().filter(r-> Boolean.parseBoolean(r.getMiejsceZmiany()));
-//    }
-
+    @Override
+    public List<Schedule> findByDate(String date) {
+        List<Schedule> schedules = new ArrayList<>();
+        return null;
+    }
 }
