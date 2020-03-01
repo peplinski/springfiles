@@ -15,7 +15,7 @@ import pl.springboot.file.services.RozkladService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/rozklady")
+@RequestMapping("/rodzajRozkladow")
 public class RozkladController {
 
     private RozkladService rozkladService;
@@ -25,13 +25,13 @@ public class RozkladController {
         this.rozkladService = rozkladService;
     }
 
-    @GetMapping(value = "/rodzajRozkladow/rozklads")
+    @GetMapping(value = "/rozklads")
     public String home(Model model) {
         model.addAttribute("rozklad", new RodzajRozkladu());
         List<RodzajRozkladu> rozklady = rozkladService.findAll();
         model.addAttribute("rozklady", rozklady);
 
-        return "view/admin/rodzajRozkladow/rozklads";
+        return "view/rodzajRozkladow/rozklads";
     }
 
     @PostMapping(value = "/addrozklad")
