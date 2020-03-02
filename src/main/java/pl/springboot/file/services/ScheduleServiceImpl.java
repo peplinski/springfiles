@@ -62,14 +62,15 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
     }
 
+
     @Override
-    public void deleteById(String idToDelete) {
+    public void deleteById(Long idToDelete) {
         scheduleRepository.deleteById(idToDelete);
     }
 
     @Override
-    public Optional<Schedule> findById(String id) {
-        return rozkladRepository.findById(id);
+    public Optional<Schedule> findById(Long id) {
+        return scheduleRepository.findById(id);
     }
 
     @Override

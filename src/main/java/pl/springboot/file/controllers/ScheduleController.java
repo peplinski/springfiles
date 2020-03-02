@@ -46,16 +46,16 @@ public class ScheduleController {
         return "redirect:/schedules";
     }
 
-    @GetMapping("listschedules/{id}/delete")
-    public String deleteById(@PathVariable String id){
+    @GetMapping("schedules/{id}/delete")
+    public String deleteById(@PathVariable Long id){
 
         log.debug("Deleting id: " + id);
 
         scheduleService.deleteById(id);
-        return "redirect:/listschedules";
+        return "redirect:/schedules";
     }
     @GetMapping("schedule/{id}/update")
-    public String updateRecipe(@PathVariable String id, Model model){
+    public String updateRecipe(@PathVariable Long id, Model model){
         model.addAttribute("schedule", scheduleService.findById(id));
         log.info("Id to Update: " + id);
         return SCHEDULE_SCHEDULEFORM_URL;
@@ -79,6 +79,6 @@ public class ScheduleController {
         scheduleService.save(schedule);
         model.addAttribute("schedule", scheduleService.findAll());
         log.info("Updated id: " + schedule.getId());
-        return "redirect:/listschedules";
+        return "redirect:/schedules";
     }
 }

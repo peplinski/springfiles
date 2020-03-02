@@ -25,9 +25,9 @@ public class RozkladServiceImpl implements RozkladService {
     }
 
     @Override
-    public boolean save(RodzajRozkladu rodzajRozkladu) {
-        rozkladRepository.save(rodzajRozkladu);
-        return false;
+    public RodzajRozkladu save(RodzajRozkladu rodzajRozkladu) {
+      return   rozkladRepository.save(rodzajRozkladu);
+
     }
 
     String findAllByTypRozkladu(String typRozkladu, String startLine, String godz) {

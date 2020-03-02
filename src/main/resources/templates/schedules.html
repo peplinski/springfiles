@@ -68,8 +68,8 @@
                     <td th:text="${schedule.koniecPracy}">19.59</td>
                     <td th:text="${schedule.miejsceZmiany}">zmiana</td>
 
-                    <td><a href="#" th:href="@{'/schedule/' + ${schedule.id} + '/update'}">Edit</a></td>
-                    <td><a href="#" th:href="@{'/listschedules/' + ${schedule.id} + '/delete'}">Delete</a></td>
+                    <td><a href="#" th:href="@{'/schedules/' + ${schedule.id} + '/update'}">Edit</a></td>
+                    <td><a href="#" th:href="@{'/schedules/' + ${schedule.id} + '/delete'}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

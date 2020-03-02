@@ -10,5 +10,5 @@ import java.util.List;
 public interface ScheduleRepository extends CrudRepository<Schedule,Long> {
 List<Schedule> findScheduleByNrSluzbowy(String nrSluzbowy);
 
-    void deleteById(String idToDelete);
+    void deleteById(Long idToDelete);
 }

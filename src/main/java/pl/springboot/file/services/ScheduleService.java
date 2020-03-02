@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface ScheduleService {
     List<Schedule> findAll();
 
+    void deleteById(Long idToDelete);
+
     Schedule save(Schedule schedule);
 
     List<Schedule> findByDate(String date);
@@ -18,9 +20,7 @@ public interface ScheduleService {
 
     boolean saveDataFromCsv(MultipartFile file, String date, TypRozkladu typRozkladu);
 
-    void deleteById(String id);
-
-    Optional<Schedule> findById(String id);
+    Optional<Schedule> findById(Long id);
 
 }
 
