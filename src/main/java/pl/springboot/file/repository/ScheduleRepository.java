@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends CrudRepository<Schedule,Long> {
 List<Schedule> findScheduleByNrSluzbowy(String nrSluzbowy);
+
+    void deleteById(String idToDelete);
 }

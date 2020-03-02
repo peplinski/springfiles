@@ -15,6 +15,7 @@ import pl.springboot.file.repository.ScheduleRepository;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -59,6 +60,21 @@ public class ScheduleServiceImpl implements ScheduleService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public void deleteById(String idToDelete) {
+        scheduleRepository.deleteById(idToDelete);
+    }
+
+    @Override
+    public Optional<Schedule> findById(String id) {
+        return rozkladRepository.findById(id);
+    }
+
+    @Override
+    public Schedule save(Schedule schedule) {
+        return scheduleRepository.save(schedule);
     }
 
     String findAllByTypRozkladu(String typRozkladu, String startLine, String godz) {

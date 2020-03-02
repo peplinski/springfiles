@@ -1,18 +1,23 @@
 package pl.springboot.file.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.springboot.file.model.Schedule;
 import pl.springboot.file.services.ScheduleService;
 
+import javax.validation.Valid;
 import java.util.List;
-
+@Slf4j
 @Controller
 public class ScheduleController {
+    private static final   String SCHEDULE_SCHEDULEFORM_URL = "schedule/scheduleform";
 
     private ScheduleService scheduleService;
 
@@ -39,5 +44,41 @@ public class ScheduleController {
             redirectAttributes.addFlashAttribute("errormessage", "File Upload not done, Please try again");
         }
         return "redirect:/schedules";
+    }
+
+    @GetMapping("listschedules/{id}/delete")
+    public String deleteById(@PathVariable String id){
+
+        log.debug("Deleting id: " + id);
+
+        scheduleService.deleteById(id);
+        return "redirect:/listschedules";
+    }
+    @GetMapping("schedule/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("schedule", scheduleService.findById(id));
+        log.info("Id to Update: " + id);
+        return SCHEDULE_SCHEDULEFORM_URL;
+    }
+
+    @PostMapping("schedule")
+    public String updateSchedule(@Valid Schedule schedule,
+                                 BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            schedule.setId(schedule.getId());
+            schedule.setDate(schedule.getDate());
+            schedule.setTypRozkladu(schedule.getTypRozkladu());
+            schedule.setNrSluzbowy(schedule.getNrSluzbowy());
+            schedule.setLinia(schedule.getLinia());
+            schedule.setPoczatekPracy(schedule.getPoczatekPracy());
+            schedule.setKoniecPracy(schedule.getKoniecPracy());
+            schedule.setMiejsceZmiany(schedule.getMiejsceZmiany());
+            return SCHEDULE_SCHEDULEFORM_URL;
+        }
+
+        scheduleService.save(schedule);
+        model.addAttribute("schedule", scheduleService.findAll());
+        log.info("Updated id: " + schedule.getId());
+        return "redirect:/listschedules";
     }
 }
