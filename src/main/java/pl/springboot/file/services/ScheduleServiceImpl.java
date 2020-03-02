@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -76,7 +77,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public Set<Schedule> findScheduleByNrSluzbowy(String nrSluzbowy) {
-        return null;
+        return scheduleRepository.findScheduleByNrSluzbowy(nrSluzbowy).stream().collect(Collectors.toSet());
     }
 
     @Override
