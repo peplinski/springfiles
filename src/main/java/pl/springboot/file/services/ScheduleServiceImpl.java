@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -71,6 +72,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public Optional<Schedule> findById(Long id) {
         return scheduleRepository.findById(id);
+    }
+
+    @Override
+    public Set<Schedule> findScheduleByNrSluzbowy(String nrSluzbowy) {
+        return null;
     }
 
     @Override

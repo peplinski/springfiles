@@ -31,9 +31,10 @@
                     <label for="date">Data</label>
                     <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
                 </div>
-                <div class="form-group">
+                <div class="col-md-2">
                     <label for="typRozkladu">Typ Rozkladu</label>
                     <select class="form-control" id="typRozkladu" name="typRozkladu" th:field="*{typRozkladu}">
+                        <!--/*@thymesVar id="TypRozkladu" type="pl.springboot.file.model.TypRozkladu"*/-->
                         <option th:each="typOpt : ${T(pl.springboot.file.model.TypRozkladu).values()}"
                                 th:value="${typOpt}" th:text="${typOpt.dispayValue}"></option>
                     </select>
@@ -68,8 +69,8 @@
                     <td th:text="${schedule.koniecPracy}">19.59</td>
                     <td th:text="${schedule.miejsceZmiany}">zmiana</td>
 
-                    <td><a href="#" th:href="@{'/schedules/' + ${schedule.id} + '/update'}">Edit</a></td>
-                    <td><a href="#" th:href="@{'/schedules/' + ${schedule.id} + '/delete'}">Delete</a></td>
+                    <td><a href="#" th:href="@{'/schedule/' + ${schedule.id} + '/update'}">Edit</a></td>
+                    <td><a href="#" th:href="@{'/listschedules/' + ${schedule.id} + '/delete'}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>

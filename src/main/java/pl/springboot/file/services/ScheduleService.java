@@ -7,6 +7,7 @@ import pl.springboot.file.model.TypRozkladu;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ScheduleService {
     List<Schedule> findAll();
@@ -22,5 +23,6 @@ public interface ScheduleService {
 
     Optional<Schedule> findById(Long id);
 
+    Set<Schedule> findScheduleByNrSluzbowy(String nrSluzbowy);
 }
 

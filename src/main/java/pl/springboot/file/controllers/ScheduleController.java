@@ -14,48 +14,53 @@ import pl.springboot.file.services.ScheduleService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
+
 @Slf4j
 @Controller
 public class ScheduleController {
-    private static final   String SCHEDULE_SCHEDULEFORM_URL = "schedule/scheduleform";
 
+    private static final String SCHEDULE_SCHEDULEFORM_URL = "schedule/scheduleform";
     private ScheduleService scheduleService;
+
 
     public ScheduleController(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping(value = "/schedules")
+    @GetMapping(value = "/listschedules")
     public String home(Model model) {
         model.addAttribute("schedule", new Schedule());
         List<Schedule> schedules = scheduleService.findAll();
         model.addAttribute("schedules", schedules);
 
-        return "schedules";
+        return "listschedules";
     }
 
     @PostMapping(value = "/fileupload")
     public String uploadFile(@ModelAttribute Schedule schedule, RedirectAttributes redirectAttributes) {
         boolean isFlag = scheduleService.saveDataFromCsv(schedule.getFile(), schedule.getDate(), schedule.getTypRozkladu());
+        log.info("Wczytanie danych" + schedule.getDate());
         if (isFlag) {
             redirectAttributes.addAttribute("date", schedule.getDate());
             redirectAttributes.addFlashAttribute("succesmessage", "File Upload Successfully");
         } else {
             redirectAttributes.addFlashAttribute("errormessage", "File Upload not done, Please try again");
         }
-        return "redirect:/schedules";
+        return "redirect:/listschedules";
     }
 
-    @GetMapping("schedules/{id}/delete")
-    public String deleteById(@PathVariable Long id){
+    @GetMapping("listschedules/{id}/delete")
+    public String deleteById(@PathVariable Long id) {
 
         log.debug("Deleting id: " + id);
 
         scheduleService.deleteById(id);
-        return "redirect:/schedules";
+        return "redirect:/listschedules";
     }
+
     @GetMapping("schedule/{id}/update")
-    public String updateRecipe(@PathVariable Long id, Model model){
+    public String update(@PathVariable Long id, Model model) {
         model.addAttribute("schedule", scheduleService.findById(id));
         log.info("Id to Update: " + id);
         return SCHEDULE_SCHEDULEFORM_URL;
@@ -79,6 +84,15 @@ public class ScheduleController {
         scheduleService.save(schedule);
         model.addAttribute("schedule", scheduleService.findAll());
         log.info("Updated id: " + schedule.getId());
-        return "redirect:/schedules";
+        return "redirect:/listschedules";
+    }
+
+    @GetMapping("/busDriver/{nrSluzbowy}")
+    public String schowDriverWork(@PathVariable("nrSluzbowy") String nrSluzbowy, Model model) {
+        model.addAttribute("schedule", new Schedule());
+        Set<Schedule> schedules = scheduleService.findScheduleByNrSluzbowy(nrSluzbowy);
+        model.addAttribute("schedules", schedules);
+
+        return "/schedule/workDay";
     }
 }
