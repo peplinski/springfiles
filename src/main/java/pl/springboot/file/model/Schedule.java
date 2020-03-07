@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +19,8 @@ public class Schedule {
     private Long id;
     @Column(name = "date")
     private String date;
-    @Enumerated(value = EnumType.STRING)
     @Column(name = "typ_rozkladu")
-    private TypRozkladu typRozkladu;
+    private String typRozkladu;
     @Column(name = "nr_sluzbowy")
     private String nrSluzbowy;
     @Column(name = "linia")

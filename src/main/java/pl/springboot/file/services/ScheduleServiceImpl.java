@@ -4,11 +4,9 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pl.springboot.file.model.RodzajRozkladu;
 import pl.springboot.file.model.Schedule;
-import pl.springboot.file.model.TypRozkladu;
 import pl.springboot.file.repository.RozkladRepository;
 import pl.springboot.file.repository.ScheduleRepository;
 
@@ -20,7 +18,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
     private ScheduleRepository scheduleRepository;
@@ -36,7 +33,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         return (List<Schedule>) scheduleRepository.findAll();
     }
 
-    public boolean saveDataFromCsv(MultipartFile file, String date, TypRozkladu typRozkladu) {
+    public boolean saveDataFromCsv(MultipartFile file, String date, String typRozkladu) {
         List<Schedule> scheduleList = new ArrayList<>();
         try {
             InputStreamReader reader = new InputStreamReader(file.getInputStream());
@@ -47,11 +44,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                 Schedule schedule = new Schedule();
                 schedule.setDate(date);
                 schedule.setTypRozkladu(typRozkladu);
-                schedule.setNrSluzbowy(record.get(0).trim());
+                schedule.setNrSluzbowy(record.get(0));
                 schedule.setLinia(record.get(1).trim());
                 schedule.setPoczatekPracy(record.get(2).trim());
                 schedule.setKoniecPracy(record.get(3).trim());
-                schedule.setMiejsceZmiany(findAllByTypRozkladu(typRozkladu.getDispayValue(), schedule.getLinia(), schedule.getPoczatekPracy()));
+                schedule.setMiejsceZmiany(findAllByTypRozkladu(schedule.getTypRozkladu(), schedule.getLinia(), schedule.getPoczatekPracy()));
                 if (record.get(0).isEmpty())
                     continue;
 

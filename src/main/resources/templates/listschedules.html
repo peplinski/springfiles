@@ -32,11 +32,13 @@
                     <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
                 </div>
                 <div class="col-md-2">
-                    <label for="typRozkladu">Typ Rozkladu</label>
-                    <select class="form-control" id="typRozkladu" name="typRozkladu" th:field="*{typRozkladu}">
-                        <!--/*@thymesVar id="TypRozkladu" type="pl.springboot.file.model.TypRozkladu"*/-->
-                        <option th:each="typOpt : ${T(pl.springboot.file.model.TypRozkladu).values()}"
-                                th:value="${typOpt}" th:text="${typOpt.dispayValue}"></option>
+                    <label for="rodzajrozkladu">Rodzaj rozkladu</label>
+                    <select class="form-control" id="rodzajrozkladu" th:field="*{typRozkladu}">
+                        <option value="Powszedni Szkolny">Powszedni Szkolny</option>
+                        <option value="Sobota">Sobota</option>
+                        <option value="Niedziala">Niedziela</option>
+                        <option value="POwszedni Ferie">Powszedni Ferie</option>
+                        <option value="Powszedni Wakacje">Powszedni Wakacje</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
