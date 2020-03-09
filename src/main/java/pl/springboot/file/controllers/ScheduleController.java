@@ -33,7 +33,6 @@ public class ScheduleController {
         model.addAttribute("schedule", new Schedule());
         List<Schedule> schedules = scheduleService.findAll();
         model.addAttribute("schedules", schedules);
-
         return "listschedules";
     }
 

@@ -7,11 +7,21 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Dodaj Rozklad</h2>
-            <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
-            <form action="" th:action="@{'/addrozklad'}" th:object="${rozklad}" method="post"
-                  enctype="multipart/form-data">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${succesmessage}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <!--/*@thymesVar id="succesmessage" type="pl.springboot.file.model.RodzajRozkladu"*/-->
+                <strong th:text="${succesmessage}"></strong>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong th:text="${errormessage}"></strong>
+            </div>
+            <form action="" th:action="@{'/addrozklad'}" th:object="${rodzajRozkladu}" method="post">
                 <div class="col-md-2">
-                    <label for="rodzajrozkladu">Rodzaj rozkladu</label>
                     <select class="form-control" id="rodzajrozkladu" th:field="*{typRozkladu}">
                         <option value="Powszedni Szkolny">Powszedni Szkolny</option>
                         <option value="Sobota">Sobota</option>
