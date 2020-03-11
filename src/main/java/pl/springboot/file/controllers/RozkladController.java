@@ -33,11 +33,9 @@ public class RozkladController {
     @PostMapping("/addrozklad")
     public String addRozklad(@ModelAttribute @Valid RodzajRozkladu rodzajRozkladu, RedirectAttributes redirectAttributes) {
         rozkladService.save(rodzajRozkladu);
-//        if (result.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("succesmessage","Zapisano rozkład");
-//        }else {
-//            redirectAttributes.addFlashAttribute("errormessage","Nie udało się zapisać rozkładu");
-//        }
+
+            redirectAttributes.addFlashAttribute("RodzajRozkladu", rodzajRozkladu);
+            redirectAttributes.addFlashAttribute("message", "Utworzono nowy Rodzaj Rozkładu");
         return "redirect:rozklads";
     }
 }

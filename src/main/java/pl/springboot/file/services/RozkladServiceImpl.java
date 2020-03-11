@@ -25,9 +25,10 @@ public class RozkladServiceImpl implements RozkladService {
     }
 
     @Override
-    public RodzajRozkladu save(RodzajRozkladu rodzajRozkladu) {
-      return   rozkladRepository.save(rodzajRozkladu);
+    public void save(RodzajRozkladu rodzajRozkladu) {
+        rozkladRepository.save(rodzajRozkladu);
     }
+
 
     String findAllByTypRozkladu(String typRozkladu, String startLine, String godz) {
         List<RodzajRozkladu> rozkladList = new ArrayList<>();
@@ -77,7 +78,7 @@ public class RozkladServiceImpl implements RozkladService {
 //            if (row.getCell(5).getCellTypeEnum() == CellType.STRING) {
 //                rodzajRozkladu.setPierwszaLinia(row.getCell(5).getStringCellValue());
 //            }
-//            rozkladRepository.save(rodzajRozkladu);
+//            rozkladRepository.saveRozklad(rodzajRozkladu);
 //        }
 //        return true;
 //    }

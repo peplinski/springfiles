@@ -13,4 +13,5 @@ public interface RozkladRepository extends CrudRepository<RodzajRozkladu,Long> {
     String findAllByTypRozkladuAndLiniaAndGodzina(String typRozkladu, String startLine, String godz);
 
     Optional<Schedule> findById(String id);
+
 }

@@ -10,11 +10,14 @@
         <input type="date" th:field="*{date}" id="date" placeholder="Data">
         <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
         <div class="col-md-2">
-            <label for="typRozkladu">Typ Rozkladu</label>
-            <select class="form-control" id="typRozkladu" name="typRozkladu" th:field="*{typRozkladu}">
-                <!--/*@thymesVar id="dispayValue" type="pl.springboot.file.model.TypRozkladu"*/-->
-                <option th:each="typOpt : ${T(pl.springboot.file.model.TypRozkladu).values()}"
-                        th:value="${typOpt}" th:text="${typOpt.dispayValue}"></option>
+            <label for="rodzajrozkladu">Rodzaj rozkladu</label>
+            <select class="form-control" id="rodzajrozkladu" th:field="*{typRozkladu}">
+                <option value="Powszedni Szkolny">Powszedni Szkolny</option>
+                <option value="Sobota">Sobota</option>
+                <option value="Niedziala">Niedziela</option>
+                <option value="POwszedni Ferie">Powszedni Ferie</option>
+                <option value="Powszedni Wakacje">Powszedni Wakacje</option>
+                <option value="Specjalny">Specjalny</option>
             </select>
         </div>
         <input type="text" th:field="*{nrSluzbowy}" id="text" placeholder="Nr Służbowy">

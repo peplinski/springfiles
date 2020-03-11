@@ -7,5 +7,5 @@ import java.util.List;
 public interface RozkladService {
     List<RodzajRozkladu> findAll();
 
-    RodzajRozkladu save(RodzajRozkladu rodzajRozkladu);
+    void save(RodzajRozkladu rodzajRozkladu);
 }

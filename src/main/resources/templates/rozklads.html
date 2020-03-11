@@ -29,25 +29,31 @@
                         <option value="POwszedni Ferie">Powszedni Ferie</option>
                         <option value="Powszedni Wakacje">Powszedni Wakacje</option>
                     </select>
+                    <p th:if="${#fields.hasErrors('typRozkladu')}" th:errors="*{typRozkladu}"></p>
                     <div class="col-md-6">
                         <label>Linia</label>
                         <input type="text" class="form-control" id="linia" th:field="*{linia}">
+                        <p th:if="${#fields.hasErrors('linia')}" th:errors="*{linia}"></p>
                     </div>
                     <div class="col-md-6">
                         <label>Brygada</label>
                         <input type="text" class="form-control" id="brygada" th:field="*{brygada}">
+                        <p th:if="${#fields.hasErrors('brygada')}" th:errors="*{brygada}"></p>
                     </div>
                     <div class="col-md-6">
                         <label>Godzina</label>
                         <input type="text" class="form-control" id="godzina" th:field="*{godzina}">
+                        <p th:if="${#fields.hasErrors('godzina')}" th:errors="*{godzina}"></p>
                     </div>
                     <div class="col-md-12">
                         <label>Miejsce zamiany</label>
                         <input type="text" class="form-control" id="miejsce_zmiany" th:field="*{miejsceZmiany}">
+                        <p th:if="${#fields.hasErrors('miejsceZmiany')}" th:errors="*{miejsceZmiany}"></p>
                     </div>
                     <div class="col-md-6">
                         <label>Rozklad</label>
                         <input type="text" class="form-control" id="Jaki_rozklad" th:field="*{pierwszaLinia}">
+                        <p th:if="${#fields.hasErrors('pierwszaLinia')}" th:errors="*{pierwszaLinia}"></p>
                     </div>
 
                 </div>
